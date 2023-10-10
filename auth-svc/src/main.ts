@@ -1,18 +1,19 @@
 import { NestFactory } from '@nestjs/core';
-import { AuthModule } from './auth.module';
-import { Transport } from '@nestjs/microservices';
-import { AUTH_PACKAGE_NAME } from './proto/auth.pb';
-import { join } from 'path';
-import { HttpExceptionFilter } from './infrastructure/filter/http-exception';
+import { GrpcOptions, Transport } from '@nestjs/microservices';
 import { ValidationPipe } from '@nestjs/common';
 
+import { AppModule } from './app.module';
+
+import { AUTH_PACKAGE_NAME } from './auth/proto/auth.pb';
+import { HttpExceptionFilter } from './auth/infrastructure/filter/http-exception';
+
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice(AuthModule, {
-    trasport: Transport.GRPC,
+  const app = await NestFactory.createMicroservice<GrpcOptions>(AppModule, {
+    transport: Transport.GRPC,
     options: {
       url: '0.0.0.0:50051',
       package: AUTH_PACKAGE_NAME,
-      protoPath: join('node_modules/micro-buy-shared-proto/proto/auth.proto'),
+      protoPath: 'node_modules/micro-buying-protos/proto/auth.proto',
     },
   });
 

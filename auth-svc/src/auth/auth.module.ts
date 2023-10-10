@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -9,18 +8,17 @@ import { AuthService } from './service/auth.service';
 import { JwtService } from './service/jwt.service';
 import { JwtStrategy } from './strategy/jwt.strategy';
 
+import { User } from './infrastructure/entity/user.entity';
+
 @Module({
   imports: [
     JwtModule.register({
       secret: 'dev',
       signOptions: { expiresIn: '365d' },
     }),
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) =>
-        configService.get('rdb'),
-    }),
+    TypeOrmModule.forFeature([User]),
   ],
-  controllers: [AuthController, AuthService, JwtService, JwtStrategy],
+  providers: [AuthService, JwtService, JwtStrategy],
+  controllers: [AuthController],
 })
 export class AuthModule {}
