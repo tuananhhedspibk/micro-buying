@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import rdb from './infrastructure/config/rdb';
+import { CqrsModule } from '@nestjs/cqrs';
+import { ConsumerModule } from './consumer/consumer.module';
 
 @Module({
   imports: [
@@ -12,6 +14,8 @@ import rdb from './infrastructure/config/rdb';
       useFactory: async (configService: ConfigService) =>
         configService.get('rdb'),
     }),
+    CqrsModule,
+    ConsumerModule,
   ],
 })
-export class AppModule {}
+export class QueryModule {}

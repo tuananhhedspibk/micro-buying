@@ -1,11 +1,11 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { QueryModule } from './query.module';
 import { ConfigService } from '@nestjs/config';
 import { HttpExceptionFilter } from './infrastructure/filter/http-exception';
 
 async function bootstrap(): Promise<void> {
-  const app: INestApplication = await NestFactory.create(AppModule);
+  const app: INestApplication = await NestFactory.create(QueryModule);
   const config: ConfigService = app.get(ConfigService);
 
   await configure(app, config);
