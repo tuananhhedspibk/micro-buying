@@ -15,7 +15,7 @@ const config = {
   password: `${process.env.QUERY_DATABASE_PASSWORD}`,
   database: `${process.env.QUERY_DATABASE_NAME}`,
   entities: [User],
-  migrations: ['./src/infrastructure/migrations/*.ts'],
+  migrations: ['./src/auth/infrastructure/migrations/*.ts'],
   autoLoadEntities: true,
   synchronize: false,
   namingStrategy: new SnakeNamingStrategy(),
