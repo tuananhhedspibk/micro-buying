@@ -1,18 +1,40 @@
-import { Controller, Inject } from '@nestjs/common';
+import {
+  Controller,
+  Inject,
+  OnApplicationBootstrap,
+  OnApplicationShutdown,
+} from '@nestjs/common';
 import { EventBus } from '@nestjs/cqrs';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { ClientKafka, MessagePattern, Payload } from '@nestjs/microservices';
+
+import { KAFKA_SERVICE } from '../../../utils/constants';
+
 import { ItemCreatedEvent } from '@shared/events/item-created.event';
-import { plainToInstance } from 'class-transformer';
-import { KafkaMessage } from 'kafkajs';
+
+import { MessagePattern as KafkaMessagePattern } from '@shared/kafka/constants';
 
 @Controller()
-export class ItemCreatedConsumer {
+export class ItemCreatedConsumer
+  implements OnApplicationBootstrap, OnApplicationShutdown {
+  @Inject(KAFKA_SERVICE)
+  private readonly kafkaClient: ClientKafka;
+
   @Inject(EventBus)
   private readonly eventBus: EventBus;
 
-  @MessagePattern('ItemCreated')
-  private consume(@Payload() { value }: KafkaMessage): void {
-    const event: ItemCreatedEvent = plainToInstance(ItemCreatedEvent, value);
+  public onApplicationBootstrap() {
+    this.kafkaClient.subscribeToResponseOf(
+      KafkaMessagePattern.ItemCreatedEvent,
+    );
+  }
+
+  public onApplicationShutdown() {
+    this.kafkaClient.close();
+  }
+
+  @MessagePattern(KafkaMessagePattern.ItemCreatedEvent)
+  private consume(@Payload() message: any): void {
+    const event: ItemCreatedEvent = new ItemCreatedEvent({ ...message });
 
     this.eventBus.publish(event);
   }
