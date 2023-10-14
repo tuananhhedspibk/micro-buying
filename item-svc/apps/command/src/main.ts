@@ -10,6 +10,8 @@ async function bootstrap(): Promise<void> {
   const app: INestApplication = await NestFactory.create(CommandModule);
   const config: ConfigService = app.get(ConfigService);
 
+  await app.init();
+
   await configure(app, config);
 }
 

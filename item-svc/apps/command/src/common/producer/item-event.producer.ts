@@ -5,6 +5,7 @@ import {
   OnModuleInit,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { ClientId as KafkaClientId } from '@shared/kafka/constants';
 import { Kafka, Producer } from 'kafkajs';
 import { BaseEvent } from 'nestjs-event-sourcing';
 
@@ -17,7 +18,7 @@ export class ItemEventProducer implements OnModuleInit, OnModuleDestroy {
 
   public async onModuleInit(): Promise<void> {
     const kafka: Kafka = new Kafka({
-      clientId: 'Item',
+      clientId: KafkaClientId.Item,
       brokers: [this.config.get('KAFKA_URL')],
     });
 
