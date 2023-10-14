@@ -20,6 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "proto:install": "npm i git+https://github.com/tuananhhedspibk/micro-buying-protos.git",
     "proto:auth": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/micro-buying-protos --ts_proto_out=src/auth/ node_modules/micro-buying-protos/proto/auth.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
+    "proto:item:command": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/micro-buying-protos --ts_proto_out=src/item/ node_modules/micro-buying-protos/proto/item-command.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
     "proto:all": "yarn proto:auth"
   },
   "dependencies": {
