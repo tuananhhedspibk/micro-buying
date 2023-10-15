@@ -6,6 +6,7 @@ import { config as rdbConfig } from './infrastructure/config/rdb';
 import { CqrsModule } from '@nestjs/cqrs';
 import { ConsumerModule } from './consumer/consumer.module';
 import { ConfigModule } from '@nestjs/config';
+import { GetItemModule } from './lookup/get-item/get-item.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ConfigModule } from '@nestjs/config';
     }),
     CqrsModule,
     ConsumerModule,
+    GetItemModule,
   ],
 })
 export class QueryModule {}
