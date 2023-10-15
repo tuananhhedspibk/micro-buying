@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
-import { ItemEventProducer } from '@command/common/producer/item-event.producer';
+import { ItemEventProducer } from '../../common/producer/item-event.producer';
 
 import { ItemCreatedEvent } from '@shared/events/item-created.event';
 

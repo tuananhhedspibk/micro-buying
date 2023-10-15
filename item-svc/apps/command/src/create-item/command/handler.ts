@@ -2,6 +2,8 @@ import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { Inject } from '@nestjs/common';
 import { EventSourcingHandler } from 'nestjs-event-sourcing';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import { CreateItemCommand } from './command';
 import { ItemAggregate } from '../../common/aggregate/item.aggregate';
 
@@ -17,6 +19,8 @@ export class CreateItemCommandHandler
 
   public async execute(command: CreateItemCommand): Promise<void> {
     const aggregate: ItemAggregate = new ItemAggregate();
+
+    aggregate.setId(uuidv4());
 
     this.publiser.mergeObjectContext(aggregate as any);
     aggregate.created({

@@ -1,4 +1,5 @@
 import { ItemCreatedEvent } from '@shared/events/item-created.event';
+import { ItemUpdatedEvent } from '@shared/events/item-updated.event';
 import { ExtendedAggregateRoot } from 'nestjs-event-sourcing';
 
 export type CreatedItemData = Readonly<{
@@ -6,6 +7,12 @@ export type CreatedItemData = Readonly<{
   name: string;
   image: string;
 }>;
+
+export type UpdatedItemData = {
+  code?: string;
+  name?: string;
+  image?: string;
+};
 
 export class ItemAggregate extends ExtendedAggregateRoot {
   private code: string;
@@ -45,8 +52,43 @@ export class ItemAggregate extends ExtendedAggregateRoot {
   }
 
   public created(data: CreatedItemData) {
-    const event: ItemCreatedEvent = new ItemCreatedEvent(data);
+    const event: ItemCreatedEvent = new ItemCreatedEvent({
+      id: this.id,
+      ...data,
+    });
 
     this.apply(event);
+  }
+
+  public onItemCreatedEvent(event: ItemCreatedEvent): void {
+    this.id = event.id;
+    this.setCode(event.code);
+    this.setName(event.name);
+    this.setImage(event.image);
+  }
+
+  public updated(data: UpdatedItemData) {
+    const event: ItemUpdatedEvent = new ItemUpdatedEvent({
+      id: this.id,
+      ...data,
+    });
+
+    this.apply(event);
+  }
+
+  public onItemUpdatedEvent(event: ItemUpdatedEvent): void {
+    this.id = event.id;
+
+    if (event.code) {
+      this.setCode(event.code);
+    }
+
+    if (event.name) {
+      this.setName(event.name);
+    }
+
+    if (event.image) {
+      this.setImage(event.image);
+    }
   }
 }

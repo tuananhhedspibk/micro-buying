@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventSourcingModule } from 'nestjs-event-sourcing';
 
 import { CreateItemModule } from './create-item/create-item.module';
+import { UpdateItemModule } from './update-item/update-item.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CreateItemModule } from './create-item/create-item.module';
       inject: [ConfigService],
     }),
     CreateItemModule,
+    UpdateItemModule,
   ],
 })
 export class CommandModule {}
