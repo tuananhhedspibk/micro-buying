@@ -16,9 +16,10 @@ export interface CreateItemResponse {
 }
 
 export interface UpdateItemRequest {
-  code: string;
-  name: string;
-  image: string;
+  id: string;
+  code?: string | undefined;
+  name?: string | undefined;
+  image?: string | undefined;
 }
 
 export interface UpdateItemResponse {

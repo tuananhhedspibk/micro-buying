@@ -3700,7 +3700,7 @@ methods@^1.1.2, methods@~1.1.2:
 
 "micro-buying-protos@github:tuananhhedspibk/micro-buying-protos":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/tuananhhedspibk/micro-buying-protos.git#0e1c2cc54b5baf85b87665f8c14ea51b08ac0159"
+  resolved "git+ssh://git@github.com/tuananhhedspibk/micro-buying-protos.git#31e58fa130cd488dc3289fa0805a427107dc8385"
 
 micromatch@^4.0.0, micromatch@^4.0.4:
   version "4.0.5"
