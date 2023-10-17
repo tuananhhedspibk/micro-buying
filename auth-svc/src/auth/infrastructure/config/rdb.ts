@@ -1,4 +1,3 @@
-import { registerAs } from '@nestjs/config';
 import { config as dotenvConfig } from 'dotenv';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
@@ -7,7 +6,7 @@ import { User } from '../entity/user.entity';
 
 dotenvConfig({ path: '.env' });
 
-const config = {
+export const config = {
   type: 'mysql',
   host: `${process.env.QUERY_DATABASE_HOST}`,
   port: `${process.env.QUERY_DATABASE_PORT}`,
@@ -21,5 +20,4 @@ const config = {
   namingStrategy: new SnakeNamingStrategy(),
 };
 
-export default registerAs('rdb', () => config);
 export const connectionSource = new DataSource(config as DataSourceOptions);

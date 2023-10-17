@@ -3,8 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { config as dotenvConfig } from 'dotenv';
 
+import { config as rdbConfig } from './auth/infrastructure/config/rdb';
+
 import { AuthModule } from './auth/auth.module';
-import { User } from './auth/infrastructure/entity/user.entity';
 
 dotenvConfig({ path: '.env' });
 
@@ -12,12 +13,13 @@ dotenvConfig({ path: '.env' });
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: `${process.env.QUERY_DATABASE_HOST}`,
-      port: parseInt(process.env.QUERY_DATABASE_PORT),
-      username: `${process.env.QUERY_DATABASE_USERNAME}`,
-      password: `${process.env.QUERY_DATABASE_PASSWORD}`,
-      database: `${process.env.QUERY_DATABASE_NAME}`,
-      entities: [User],
+      host: rdbConfig.host,
+      port: parseInt(rdbConfig.port),
+      username: rdbConfig.username,
+      password: rdbConfig.password,
+      database: rdbConfig.database,
+      entities: rdbConfig.entities,
+      namingStrategy: rdbConfig.namingStrategy,
     }),
     AuthModule,
   ],
