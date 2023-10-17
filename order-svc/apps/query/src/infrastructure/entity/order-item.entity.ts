@@ -4,15 +4,18 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Order } from './order.entity';
 
 @Entity()
 export class OrderItem {
-  @PrimaryColumn('uuid')
+  @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column()
+  itemServiceId: string;
 
   @Column()
   orderId: string;

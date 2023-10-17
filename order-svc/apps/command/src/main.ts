@@ -1,23 +1,18 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { CommandModule } from './command.module';
 import { ConfigService } from '@nestjs/config';
-import { KafkaOptions, Transport } from '@nestjs/microservices';
-
-import {
-  ConsumerGroupId as KafkaConsumerGroupId,
-  ClientId as KafkaClientId,
-} from '@shared/kafka/constants';
-
-import { QueryModule } from './query.module';
 import { HttpExceptionFilter } from './infrastructure/filter/http-exception';
+import { GrpcOptions, Transport } from '@nestjs/microservices';
+import { ORDER_COMMAND_PACKAGE_NAME } from './common/proto/order-command.pb';
 
 async function bootstrap(): Promise<void> {
-  const app: INestApplication = await NestFactory.create(QueryModule);
+  const app: INestApplication = await NestFactory.create(CommandModule);
   const config: ConfigService = app.get(ConfigService);
 
-  await configure(app, config);
+  await app.init();
 
-  await app.listen(undefined);
+  await configure(app, config);
 }
 
 async function configure(
@@ -28,17 +23,13 @@ async function configure(
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
-  app.connectMicroservice<KafkaOptions>(
+  app.connectMicroservice<GrpcOptions>(
     {
-      transport: Transport.KAFKA,
+      transport: Transport.GRPC,
       options: {
-        client: {
-          clientId: KafkaClientId.Order,
-          brokers: [config.get('KAFKA_URL')],
-        },
-        consumer: {
-          groupId: KafkaConsumerGroupId.OrderSvc,
-        },
+        url: config.get('COMMAND_GRPC_URL'),
+        package: ORDER_COMMAND_PACKAGE_NAME,
+        protoPath: 'node_modules/micro-buying-protos/proto/order-command.proto',
       },
     },
     { inheritAppConfig: true },
