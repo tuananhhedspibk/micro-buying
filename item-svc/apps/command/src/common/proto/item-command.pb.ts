@@ -20,6 +20,7 @@ export interface UpdateItemRequest {
   code?: string | undefined;
   name?: string | undefined;
   image?: string | undefined;
+  status?: string | undefined;
 }
 
 export interface UpdateItemResponse {

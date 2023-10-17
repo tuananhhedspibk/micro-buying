@@ -74,6 +74,11 @@ export class UpdateItemCommandHandler
       updatedItemData.image = command.image;
     }
 
+    if (command.status) {
+      aggregate.setStatus(command.status);
+      updatedItemData.status = command.status;
+    }
+
     if (Object.keys(updatedItemData).length > 0) {
       aggregate.updated(updatedItemData);
 

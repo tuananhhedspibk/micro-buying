@@ -1,7 +1,6 @@
-export class GetItemDto {
-  public id: string;
+import { IsUUID } from 'class-validator';
 
-  constructor(id: string) {
-    this.id = id;
-  }
+export class GetItemDto {
+  @IsUUID()
+  public id: string;
 }

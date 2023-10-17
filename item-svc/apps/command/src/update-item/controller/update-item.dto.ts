@@ -1,6 +1,7 @@
 export type UpdateItemDto = Readonly<{
-  id: string;
+  id?: string;
   code?: string;
   name?: string;
   image?: string;
+  status?: string;
 }>;

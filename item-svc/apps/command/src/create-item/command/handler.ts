@@ -23,6 +23,7 @@ export class CreateItemCommandHandler
     aggregate.setId(uuidv4());
 
     this.publiser.mergeObjectContext(aggregate as any);
+
     aggregate.created({
       code: command.code,
       name: command.name,

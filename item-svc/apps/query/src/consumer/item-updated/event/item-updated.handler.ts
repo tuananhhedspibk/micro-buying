@@ -2,9 +2,10 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Item } from '../../../infrastructure/entity/item.entity';
+import { Item, ItemStatus } from '../../../infrastructure/entity/item.entity';
 
 import { ItemUpdatedEvent } from '@shared/events/item-updated.event';
+import { NotFoundException } from '@nestjs/common';
 
 @EventsHandler(ItemUpdatedEvent)
 export class ItemUpdatedHandler implements IEventHandler<ItemUpdatedEvent> {
@@ -16,6 +17,10 @@ export class ItemUpdatedHandler implements IEventHandler<ItemUpdatedEvent> {
       where: { id: event.id },
     });
 
+    if (!item) {
+      throw new NotFoundException('Not found item');
+    }
+
     if (event.code) {
       item.code = event.code;
     }
@@ -26,6 +31,10 @@ export class ItemUpdatedHandler implements IEventHandler<ItemUpdatedEvent> {
 
     if (event.name) {
       item.name = event.name;
+    }
+
+    if (event.status) {
+      item.status = event.status as ItemStatus;
     }
 
     await this.repository.update({ id: item.id }, item);

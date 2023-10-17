@@ -4855,7 +4855,7 @@ methods@^1.1.2, methods@~1.1.2:
 
 "micro-buying-protos@git+github:tuananhhedspibk/micro-buying-protos.git":
   version "1.0.0"
-  resolved "git+github:tuananhhedspibk/micro-buying-protos.git#31e58fa130cd488dc3289fa0805a427107dc8385"
+  resolved "git+github:tuananhhedspibk/micro-buying-protos.git#377c76f5c806e67f44c5e9b10bd3a9eace76480b"
 
 micromatch@^4.0.0, micromatch@^4.0.4:
   version "4.0.5"

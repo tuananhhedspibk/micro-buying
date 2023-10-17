@@ -19,6 +19,7 @@ import { GetItemModule } from './lookup/get-item/get-item.module';
       username: rdbConfig.username,
       password: rdbConfig.password,
       entities: rdbConfig.entities,
+      namingStrategy: rdbConfig.namingStrategy,
     }),
     CqrsModule,
     ConsumerModule,

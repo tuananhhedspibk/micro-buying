@@ -12,12 +12,14 @@ export type UpdatedItemData = {
   code?: string;
   name?: string;
   image?: string;
+  status?: string;
 };
 
 export class ItemAggregate extends ExtendedAggregateRoot {
   private code: string;
   private image: string;
   private name: string;
+  private status: string;
 
   public getId(): string | undefined {
     return this.id;
@@ -49,6 +51,14 @@ export class ItemAggregate extends ExtendedAggregateRoot {
 
   public setName(value: string) {
     this.name = value;
+  }
+
+  public getStatus(): string {
+    return this.status;
+  }
+
+  public setStatus(value: string) {
+    this.status = value;
   }
 
   public created(data: CreatedItemData) {
@@ -89,6 +99,10 @@ export class ItemAggregate extends ExtendedAggregateRoot {
 
     if (event.image) {
       this.setImage(event.image);
+    }
+
+    if (event.status) {
+      this.setStatus(event.status);
     }
   }
 }

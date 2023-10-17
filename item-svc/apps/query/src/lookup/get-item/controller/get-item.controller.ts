@@ -7,9 +7,9 @@ import {
   ITEM_QUERY_SERVICE_NAME,
 } from '../../../common/proto/item-query.pb';
 
-import { GetItemDto } from './get-item.dto';
 import { GetItemQuery } from '../query/get-item.query';
 import { Item } from '../../../infrastructure/entity/item.entity';
+import { GetItemDto } from './get-item.dto';
 
 @Controller()
 export class GetItemController {
