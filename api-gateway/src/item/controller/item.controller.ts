@@ -9,6 +9,11 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
+import { ClientGrpc } from '@nestjs/microservices';
+import { Request } from 'express';
+import { Observable } from 'rxjs';
+
+import { AuthGuard } from '../../auth/guard/auth.guard';
 import {
   CreateItemRequest,
   CreateItemResponse,
@@ -17,11 +22,8 @@ import {
   UpdateItemRequest,
   UpdateItemResponse,
 } from '../proto/item-command.pb';
-import { ClientGrpc } from '@nestjs/microservices';
-import { AuthGuard } from 'src/auth/guard/auth.guard';
-import { Request } from 'express';
-import { Observable } from 'rxjs';
 import {
+  GetItemResponse,
   ITEM_QUERY_SERVICE_NAME,
   ItemQueryServiceClient,
 } from '../proto/item-query.pb';
@@ -63,14 +65,14 @@ export class ItemController implements OnModuleInit {
   ): Promise<Observable<UpdateItemResponse>> {
     const body: UpdateItemRequest = req.body;
 
-    console.log('body', body);
-
     return this.commandSvc.updateItem(body);
   }
 
   @Get('/:id')
   @UseGuards(AuthGuard)
-  private getItem(@Param() id: string) {
-    return this.querySvc.getItem({ id });
+  private async getItem(
+    @Param() param: { id: string },
+  ): Promise<Observable<GetItemResponse>> {
+    return this.querySvc.getItem({ id: param.id });
   }
 }

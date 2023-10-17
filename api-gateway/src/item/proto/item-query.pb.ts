@@ -19,6 +19,7 @@ export interface ItemData {
   code: string;
   name: string;
   image: string;
+  status: string;
 }
 
 export const ITEM_QUERY_PACKAGE_NAME = "item_query";

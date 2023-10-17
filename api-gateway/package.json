@@ -22,7 +22,9 @@
     "proto:auth": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/micro-buying-protos --ts_proto_out=src/auth/ node_modules/micro-buying-protos/proto/auth.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
     "proto:item:command": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/micro-buying-protos --ts_proto_out=src/item/ node_modules/micro-buying-protos/proto/item-command.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
     "proto:item:query": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/micro-buying-protos --ts_proto_out=src/item/ node_modules/micro-buying-protos/proto/item-query.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
-    "proto:all": "yarn proto:auth"
+    "proto:order:command": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/micro-buying-protos --ts_proto_out=src/order/ node_modules/micro-buying-protos/proto/order-command.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
+    "proto:order:query": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/micro-buying-protos --ts_proto_out=src/order/ node_modules/micro-buying-protos/proto/order-query.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
+    "proto:all": "yarn proto:auth && yarn proto:item:command && yarn proto:item:query && yarn proto:order:command && yarn proto:order:query"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.9.5",
