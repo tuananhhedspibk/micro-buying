@@ -3,7 +3,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { EventSourcingHandler } from 'nestjs-event-sourcing';
 
 import { CreateItemController } from './controller/create-item.controller';
-import { CreateItemCommandHandler } from './command/handler';
+import { CreateItemCommandHandler } from './command/create-item.handler';
 import { ItemCreatedHandler } from './event/item-created.handler';
 
 import { ItemEventProducer } from '../common/producer/item-event.producer';

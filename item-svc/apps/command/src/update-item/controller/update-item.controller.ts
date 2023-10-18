@@ -6,7 +6,7 @@ import { Body, Controller, HttpStatus, Inject } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { GrpcMethod } from '@nestjs/microservices';
 import { UpdateItemDto } from './update-item.dto';
-import { UpdateItemCommand } from '../command/command';
+import { UpdateItemCommand } from '../command/update-item.command';
 
 @Controller()
 export class UpdateItemController {

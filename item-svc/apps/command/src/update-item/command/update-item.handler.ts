@@ -8,7 +8,7 @@ import {
 
 import { EventSourcingHandler } from 'nestjs-event-sourcing';
 
-import { UpdateItemCommand } from './command';
+import { UpdateItemCommand } from './update-item.command';
 import {
   ItemAggregate,
   UpdatedItemData,

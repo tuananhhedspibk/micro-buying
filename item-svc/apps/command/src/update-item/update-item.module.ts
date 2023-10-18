@@ -11,7 +11,7 @@ import {
 import { ItemEventProducer } from '../common/producer/item-event.producer';
 
 import { UpdateItemController } from './controller/update-item.controller';
-import { UpdateItemCommandHandler } from './command/handler';
+import { UpdateItemCommandHandler } from './command/update-item.handler';
 
 import { ItemUpdatedHandler } from './event/item-updated.handler';
 
