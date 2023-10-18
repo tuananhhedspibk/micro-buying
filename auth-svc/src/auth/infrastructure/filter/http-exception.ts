@@ -16,6 +16,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
       return { status, timestamp, error: [error] };
     }
 
-    return { status, timestamp, error: error.message };
+    return { status, timestamp, error: [error.message] };
   }
 }
