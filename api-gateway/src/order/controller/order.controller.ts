@@ -58,8 +58,9 @@ export class OrderController implements OnModuleInit {
   @Get('/:id')
   @UseGuards(AuthGuard)
   private async getOrder(
-    @Param() id: string,
+    @Param() param: { id: string },
   ): Promise<Observable<GetOrderResponse>> {
+    const { id } = param;
     return this.querySvc.getOrder({ id });
   }
 }

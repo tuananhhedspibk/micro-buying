@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 export const protobufPackage = "order_query";
 
 export interface ItemData {
+  id: string;
   code: string;
   name: string;
   image: string;
