@@ -19,6 +19,7 @@ export class Order {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @OneToMany((_type) => OrderItem, (orderItem) => orderItem.order, {
     cascade: true,
+    eager: true,
   })
   public items: OrderItem[];
 

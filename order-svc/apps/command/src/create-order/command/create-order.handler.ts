@@ -4,7 +4,7 @@ import { EventSourcingHandler } from 'nestjs-event-sourcing';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { CreateOrderCommand } from './command';
+import { CreateOrderCommand } from './create-order.command';
 import { OrderAggregate } from '../../common/aggregate/order.aggregate';
 import {
   ITEM_QUERY_SERVICE_NAME,
@@ -15,8 +15,7 @@ import { firstValueFrom } from 'rxjs';
 
 @CommandHandler(CreateOrderCommand)
 export class CreateOrderCommandHandler
-  implements ICommandHandler<CreateOrderCommand, void>, OnModuleInit
-{
+  implements ICommandHandler<CreateOrderCommand, void>, OnModuleInit {
   @Inject(ITEM_QUERY_SERVICE_NAME)
   private readonly itemClient: ClientGrpc;
 

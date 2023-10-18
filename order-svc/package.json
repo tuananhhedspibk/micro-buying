@@ -25,7 +25,8 @@
     "proto:install": "yarn add git+github:tuananhhedspibk/micro-buying-protos.git",
     "proto:command:order-command": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/micro-buying-protos --ts_proto_out=apps/command/src/common/ node_modules/micro-buying-protos/proto/order-command.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
     "proto:command:item-command": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/micro-buying-protos --ts_proto_out=apps/command/src/common/ node_modules/micro-buying-protos/proto/item-command.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
-    "proto:command:item-query": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/micro-buying-protos --ts_proto_out=apps/command/src/common/ node_modules/micro-buying-protos/proto/item-query.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb"
+    "proto:command:item-query": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/micro-buying-protos --ts_proto_out=apps/command/src/common/ node_modules/micro-buying-protos/proto/item-query.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
+    "proto:query:order-query": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto -I=./node_modules/micro-buying-protos --ts_proto_out=apps/query/src/common/ node_modules/micro-buying-protos/proto/order-query.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.9.5",

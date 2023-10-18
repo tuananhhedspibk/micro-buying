@@ -6,7 +6,7 @@ import { EventSourcingHandler } from 'nestjs-event-sourcing';
 
 import { CreateOrderController } from './controller/create-order.controller';
 
-import { CreateOrderCommandHandler } from './command/handler';
+import { CreateOrderCommandHandler } from './command/create-order.handler';
 import {
   ITEM_COMMAND_PACKAGE_NAME,
   ITEM_COMMAND_SERVICE_NAME,

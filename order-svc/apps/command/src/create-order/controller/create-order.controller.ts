@@ -6,7 +6,7 @@ import { Body, Controller, HttpStatus, Inject } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { GrpcMethod } from '@nestjs/microservices';
 import { CreateOrderDto } from './create-order.dto';
-import { CreateOrderCommand } from '../command/command';
+import { CreateOrderCommand } from '../command/create-order.command';
 
 @Controller()
 export class CreateOrderController {
